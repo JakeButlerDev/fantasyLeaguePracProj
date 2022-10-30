@@ -63,7 +63,7 @@ public class PlayerController {
     @DeleteMapping ("/{id}")
     public ResponseEntity<?> deletePlayerById(@PathVariable Long id) {
         //TODO: Not sure I want the below throw error, if id is not found we want SQL to silently ignore - look up additional info
-        
+
         Player deletedPlayer = playerRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
         );
