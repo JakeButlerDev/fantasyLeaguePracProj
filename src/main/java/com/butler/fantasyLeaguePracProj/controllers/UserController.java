@@ -42,12 +42,27 @@ public class UserController {
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }
 
-    //TODO: finish updateUser
-//    @PostMapping ("/{id}")
-//    public ResponseEntity<?> postOneTeamById(@PathVariable Long id, @RequestBody User updatedUserData) {
-//        User updatedUser = userRepository.findById(id).orElseThrow(
-//                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
-//        );
-//        if ()
-//    }
+    @PostMapping ("/{id}")
+    public ResponseEntity<?> postOneTeamById(@PathVariable Long id, @RequestBody User updatedUserData) {
+        User updatedUser = userRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
+        if (updatedUserData.getPassword() != null && !updatedUserData.getPassword().equals("")) {
+            updatedUser.setPassword(updatedUserData.getPassword());
+        }
+        if (updatedUserData.getEmail() != null && !updatedUserData.getEmail().equals("")) {
+            updatedUser.setEmail(updatedUserData.getEmail());
+        }
+
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable Long id) {
+        User deletedUser = userRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
+        userRepository.deleteById(id);
+        return new ResponseEntity<>(deletedUser, HttpStatus.OK);
+    }
 }

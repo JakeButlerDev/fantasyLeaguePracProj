@@ -17,6 +17,8 @@ public class FantasyTeam {
     private int currentPlayers;
     private float pointsScored;
     private int leagueStanding;
+    private int waiverOrder;
+    private double remainingFaab;
 
     public FantasyTeam(String name, int currentPlayers){
         this.name = name;
@@ -67,5 +69,21 @@ public class FantasyTeam {
 
     public int getLeagueStanding() {
         return leagueStanding;
+    }
+
+    public int getWaiverOrder() {
+        return waiverOrder;
+    }
+
+    public void setWaiverOrder(int waiverOrder) {
+        this.waiverOrder = waiverOrder;
+    }
+
+    public double getRemainingFaab() {
+        return remainingFaab;
+    }
+
+    public void setRemainingFaab(double remainingFaab) {
+        this.remainingFaab = remainingFaab;
     }
 }
