@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Player {
+    //TODO: Possibility in future to make an Outfielder Class & Keeper Class that extend Player and keep only respectable stats for position
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

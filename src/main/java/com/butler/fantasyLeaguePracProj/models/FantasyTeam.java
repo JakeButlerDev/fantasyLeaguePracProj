@@ -16,9 +16,16 @@ public class FantasyTeam {
     private int maxPlayers;
     private int currentPlayers;
     private float pointsScored;
-    private int leagueStanding;
     private int waiverOrder;
     private double remainingFaab;
+
+    // Team statistics
+    private Integer wins;
+    private Integer losses;
+    private Integer draws;
+    private Integer points;     // This is the total points for team in league standings, win = 3, draw = 1, loss = 0
+    private Double fantasyPointsScored;     // Do I want this and pointsAllowed? Could just return sum of all gameweek points to date
+    private Double fantasyPointsAllowed;
 
     public FantasyTeam(String name, int currentPlayers){
         this.name = name;
@@ -43,10 +50,6 @@ public class FantasyTeam {
         this.pointsScored = pointsScored;
     }
 
-    public void setLeagueStanding(int leagueStanding) {
-        this.leagueStanding = leagueStanding;
-    }
-
     public Long getId() {
         return id;
     }
@@ -65,10 +68,6 @@ public class FantasyTeam {
 
     public float getPointsScored() {
         return pointsScored;
-    }
-
-    public int getLeagueStanding() {
-        return leagueStanding;
     }
 
     public int getWaiverOrder() {

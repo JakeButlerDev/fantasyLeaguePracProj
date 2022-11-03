@@ -1,9 +1,6 @@
 package com.butler.fantasyLeaguePracProj.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -13,8 +10,12 @@ public class League {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    @ElementCollection(targetClass=FantasyTeam.class)
     private List<FantasyTeam> teams;
-    private List<FantasyTeam> standings;
+    @Column
+    @ElementCollection(targetClass=FantasyTeam.class)
+    private List<FantasyTeam> standings;    // Could use <String> to omly store team names, but what if I want record as well, waiver order, etc.
     private String name;
 
     public League(List<FantasyTeam> teams, String name) {
