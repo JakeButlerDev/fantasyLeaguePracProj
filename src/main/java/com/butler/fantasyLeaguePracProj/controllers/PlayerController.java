@@ -53,9 +53,10 @@ public class PlayerController {
 //        if (!updatedPlayerData.getName().equals("")) {
 //            updatedPlayer.setName(updatedPlayerData.getName());
 //        }
-        if (updatedPlayerData.getRostered() != null) {
-            updatedPlayer.setRostered(updatedPlayerData.getRostered());
-        }
+        //TODO: Below is throwing error due to using subclasses so getRostered is now in Position classes. Look into more tomorrow
+//        if (updatedPlayerData.getRostered() != null) {
+//            updatedPlayer.setRostered(updatedPlayerData.getRostered());
+//        }
 
         return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
     }

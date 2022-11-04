@@ -1,9 +1,7 @@
 package com.butler.fantasyLeaguePracProj.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class FantasyTeam {
@@ -18,6 +16,9 @@ public class FantasyTeam {
     private float pointsScored;
     private int waiverOrder;
     private double remainingFaab;
+
+    @ManyToMany(mappedBy = "teamsRostered")
+    private List<Player> playersRostered;
 
     // Team statistics
     private Integer wins;
@@ -84,5 +85,65 @@ public class FantasyTeam {
 
     public void setRemainingFaab(double remainingFaab) {
         this.remainingFaab = remainingFaab;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Player> getPlayersRostered() {
+        return playersRostered;
+    }
+
+    public void setPlayersRostered(List<Player> playersRostered) {
+        this.playersRostered = playersRostered;
+    }
+
+    public Integer getWins() {
+        return wins;
+    }
+
+    public void setWins(Integer wins) {
+        this.wins = wins;
+    }
+
+    public Integer getLosses() {
+        return losses;
+    }
+
+    public void setLosses(Integer losses) {
+        this.losses = losses;
+    }
+
+    public Integer getDraws() {
+        return draws;
+    }
+
+    public void setDraws(Integer draws) {
+        this.draws = draws;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    public Double getFantasyPointsScored() {
+        return fantasyPointsScored;
+    }
+
+    public void setFantasyPointsScored(Double fantasyPointsScored) {
+        this.fantasyPointsScored = fantasyPointsScored;
+    }
+
+    public Double getFantasyPointsAllowed() {
+        return fantasyPointsAllowed;
+    }
+
+    public void setFantasyPointsAllowed(Double fantasyPointsAllowed) {
+        this.fantasyPointsAllowed = fantasyPointsAllowed;
     }
 }
