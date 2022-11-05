@@ -1,10 +1,16 @@
 package com.butler.fantasyLeaguePracProj.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class FantasyTeam {
+
+    /*
+    Last error received when trying to create a team:
+    [nio-3334-exec-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Field 'league_standing' doesn't have a default value
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +24,11 @@ public class FantasyTeam {
     private double remainingFaab;
 
     @ManyToMany(mappedBy = "teamsRostered")
-    private List<Player> playersRostered;
+    private ArrayList<Player> playersRostered = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "league_id", referencedColumnName = "id")
+    private League league;
 
     // Team statistics
     private Integer wins;
@@ -91,11 +101,11 @@ public class FantasyTeam {
         this.id = id;
     }
 
-    public List<Player> getPlayersRostered() {
+    public ArrayList<Player> getPlayersRostered() {
         return playersRostered;
     }
 
-    public void setPlayersRostered(List<Player> playersRostered) {
+    public void setPlayersRostered(ArrayList<Player> playersRostered) {
         this.playersRostered = playersRostered;
     }
 
@@ -145,5 +155,13 @@ public class FantasyTeam {
 
     public void setFantasyPointsAllowed(Double fantasyPointsAllowed) {
         this.fantasyPointsAllowed = fantasyPointsAllowed;
+    }
+
+    public League getLeague() {
+        return league;
+    }
+
+    public void setLeague(League league) {
+        this.league = league;
     }
 }

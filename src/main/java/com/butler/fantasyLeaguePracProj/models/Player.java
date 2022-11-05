@@ -134,4 +134,6 @@ public class Player {
     public void setSaves(Short saves) {
         this.saves = saves;
     }
+
+    //TODO: How to get which position class player belongs to?
 }

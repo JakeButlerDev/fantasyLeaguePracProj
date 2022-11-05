@@ -44,19 +44,17 @@ public class PlayerController {
     @PostMapping ("/{id}")
     public ResponseEntity<?> postPlayerById(@PathVariable Long id, @RequestBody Player updatedPlayerData) {
         Player updatedPlayer =playerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        // Which data do I want to allow to be altered?
-        // Do I need this if user cannot alter player data? They can alter if the player is rostered, no other attributes
 
-//        if (updatedPlayerData.getClub() != null && !updatedPlayerData.getClub().equals("")) {
-//            updatedPlayer.setClub(updatedPlayerData.getClub());
-//        }
-//        if (!updatedPlayerData.getName().equals("")) {
-//            updatedPlayer.setName(updatedPlayerData.getName());
-//        }
+        if (updatedPlayerData.getClub() != null && !updatedPlayerData.getClub().equals("")) {
+            updatedPlayer.setClub(updatedPlayerData.getClub());
+        }
+        if (!updatedPlayerData.getName().equals("")) {
+            updatedPlayer.setName(updatedPlayerData.getName());
+        }
         //TODO: Below is throwing error due to using subclasses so getRostered is now in Position classes. Look into more tomorrow
-//        if (updatedPlayerData.getRostered() != null) {
-//            updatedPlayer.setRostered(updatedPlayerData.getRostered());
-//        }
+        if (updatedPlayerData.getRostered() != null) {
+            updatedPlayer.setRostered(updatedPlayerData.getRostered());
+        }
 
         return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
     }
