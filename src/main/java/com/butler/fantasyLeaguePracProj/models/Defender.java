@@ -2,82 +2,115 @@ package com.butler.fantasyLeaguePracProj.models;
 
 public class Defender extends Player{
 
-    // inherits id, name, rostered, gamesPlayed, minutesPlayed, teamsRostered
+    // inherits id, name, rostered, gamesPlayed, minutesPlayed, teamsRostered, all individual statistics. Will need to create a calculatePoints() method in each subclass of Player
 
-    public Defender() {
-        super();
+    public Defender(Byte goals, Byte assists, Short shots, String club, String name, Boolean rostered, Integer gamesPlayed, Double minutesPlayed, Byte cleanSheets, Short saves) {
+        super(goals, assists, shots, club, name, rostered, gamesPlayed, minutesPlayed, cleanSheets, saves);
     }
 
-    protected Byte goals;
-    protected Byte assists;
-    protected Short shots;
-    private String club;
-    private String name;
-    private Boolean rostered;
-    private Integer gamesPlayed;
-    private double minutesPlayed;
+    //TODO: public Double calculatePlayerPoints() {
+//
+//    }
+//
+//    public Double calculatePointsPerGame() {
+//
+//    }
 
-    public Byte getGoals() {
-        return goals;
-    }
-
-    public Byte getAssists() {
-        return assists;
-    }
-
-    public Short getShots() {
-        return shots;
-    }
-
-    public void setGoals(Byte goals) {
-        this.goals = goals;
-    }
-
-    public void setAssists(Byte assists) {
-        this.assists = assists;
-    }
-
-    public void setShots(Short shots) {
-        this.shots = shots;
-    }
-
+    @Override
     public String getClub() {
-        return club;
+        return super.getClub();
     }
 
+    @Override
     public String getName() {
-        return name;
+        return super.getName();
     }
 
+    @Override
     public Boolean getRostered() {
-        return rostered;
+        return super.getRostered();
     }
 
+    @Override
     public void setClub(String club) {
-        this.club = club;
+        super.setClub(club);
     }
 
+    @Override
     public void setName(String name) {
-        this.name = name;
+        super.setName(name);
     }
 
+    @Override
     public void setRostered(Boolean rostered) {
-        this.rostered = rostered;
+        super.setRostered(rostered);
     }
 
+    @Override
     public Integer getGamesPlayed() {
-        return gamesPlayed;
+        return super.getGamesPlayed();
     }
 
+    @Override
     public void setGamesPlayed(Integer gamesPlayed) {
-        this.gamesPlayed = gamesPlayed;
+        super.setGamesPlayed(gamesPlayed);
     }
 
-    public double getMinutesPlayed() {
-        return minutesPlayed;
+    @Override
+    public Double getMinutesPlayed() {
+        return super.getMinutesPlayed();
     }
 
-    public void setMinutesPlayed(double minutesPlayed) {
-        this.minutesPlayed = minutesPlayed;
+    @Override
+    public void setMinutesPlayed(Double minutesPlayed) {
+        super.setMinutesPlayed(minutesPlayed);
+    }
+    @Override
+    public Byte getGoals() {
+        return super.getGoals();
+    }
+
+    @Override
+    public Byte getAssists() {
+        return super.getAssists();
+    }
+
+    @Override
+    public Short getShots() {
+        return super.getShots();
+    }
+
+    @Override
+    public void setGoals(Byte goals) {
+        super.setGoals(goals);
+    }
+
+    @Override
+    public void setAssists(Byte assists) {
+        super.setAssists(assists);
+    }
+
+    @Override
+    public void setShots(Short shots) {
+        super.setShots(shots);
+    }
+    @Override
+    public Byte getCleanSheets() {
+        return super.getCleanSheets();
+    }
+
+    @Override
+    public Short getSaves() {
+        return super.getSaves();
+    }
+
+    @Override
+    public void setCleanSheets(Byte cleanSheets) {
+        super.setCleanSheets(cleanSheets);
+    }
+
+    @Override
+    public void setSaves(Short saves) {
+        super.setSaves(saves);
     }
 }
