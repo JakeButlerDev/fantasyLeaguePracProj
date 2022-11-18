@@ -23,6 +23,8 @@ public class FantasyTeam {
     private int waiverOrder;
     private double remainingFaab;
 
+    // TODO: Create Season Entity to bridge Player and FantasyTeam complex relationship.
+    //  As of now this is a complex ManytoMany relationship. Can simplify by creating OnetoOne relationships between Player <-> Season and Season <-> FantasyTeam
     @ManyToMany(mappedBy = "teamsRostered")
     private ArrayList<Player> playersRostered = new ArrayList<>();
 

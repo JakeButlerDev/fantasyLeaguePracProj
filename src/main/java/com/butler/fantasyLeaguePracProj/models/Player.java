@@ -25,6 +25,10 @@ public class Player {
     protected Byte cleanSheets;
     protected Short saves;
 
+    //TODO: Change from - extending Player to subclasses - to OnetoOne position field
+    // Enums Entity
+//    private Position position;
+
 
     public Player() { }
 
