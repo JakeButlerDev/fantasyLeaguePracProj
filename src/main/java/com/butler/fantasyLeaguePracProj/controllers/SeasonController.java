@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,14 @@ public class SeasonController {
         return new ResponseEntity<>(allSeasons, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSeasonById(@PathVariable Long id) {
+        Season foundSeason = seasonRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
+        return new ResponseEntity<>(foundSeason, HttpStatus.OK);
+    }
+
     @PostMapping("/")
     public ResponseEntity<?> createOneSeason(@RequestBody Season newSeasonData) {
         try {
@@ -32,6 +41,23 @@ public class SeasonController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
+    }
+
+//    @PostMapping("/{id}")
+//    public ResponseEntity<?> updateOneSeason(@PathVariable Long id, @RequestBody Season updatedSeasonData) {
+//        Season seasonToUpdate = seasonRepository.findById(id).orElseThrow(
+//                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+//        );
+//        if (updatedSeasonData.)
+//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteOneSeason(@PathVariable Long id) {
+        Season deletedSeason = seasonRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
+        seasonRepository.deleteById(id);
+        return new ResponseEntity<>(deletedSeason, HttpStatus.OK);
     }
 
 }

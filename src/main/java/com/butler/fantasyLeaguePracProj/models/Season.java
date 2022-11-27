@@ -128,4 +128,6 @@ public class Season {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //TODO: Create rest of fields, getters & setters, constructor
+
 }
