@@ -25,8 +25,11 @@ public class FantasyTeam {
 
     // TODO: Create Season Entity to bridge Player and FantasyTeam complex relationship.
     //  As of now this is a complex ManytoMany relationship. Can simplify by creating OnetoOne relationships between Player <-> Season and Season <-> FantasyTeam
-    @ManyToMany(mappedBy = "teamsRostered")
-    private ArrayList<Player> playersRostered = new ArrayList<>();
+//    @ManyToMany(mappedBy = "teamsRostered")
+//    private ArrayList<Player> playersRostered = new ArrayList<>();
+
+    @OneToOne(mappedBy = "fantasyTeam")
+    private Season season;
 
     @ManyToOne
     @JoinColumn(name = "league_id", referencedColumnName = "id")
@@ -103,14 +106,6 @@ public class FantasyTeam {
         this.id = id;
     }
 
-    public ArrayList<Player> getPlayersRostered() {
-        return playersRostered;
-    }
-
-    public void setPlayersRostered(ArrayList<Player> playersRostered) {
-        this.playersRostered = playersRostered;
-    }
-
     public Integer getWins() {
         return wins;
     }
@@ -165,5 +160,13 @@ public class FantasyTeam {
 
     public void setLeague(League league) {
         this.league = league;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
     }
 }

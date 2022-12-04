@@ -10,9 +10,12 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(name = "rosteredTeams", joinColumns =@JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
-    private List<FantasyTeam> teamsRostered;
+//    @ManyToMany
+//    @JoinTable(name = "rosteredTeams", joinColumns =@JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
+//    private List<FantasyTeam> teamsRostered;
+
+    @OneToOne(mappedBy = "player")
+    private Season season;
 
     private String club;
     private String name;
@@ -25,14 +28,12 @@ public class Player {
     protected Byte cleanSheets;
     protected Short saves;
 
-    //TODO: Change from - extending Player to subclasses - to OnetoOne position field
-    // Enums Entity
-//    private Position position;
+    private String position;
 
 
     public Player() { }
 
-    public Player(Byte goals, Byte assists, Short shots, String club, String name, Boolean rostered, Integer gamesPlayed, Double minutesPlayed, Byte cleanSheets, Short saves) {
+    public Player(Byte goals, Byte assists, Short shots, String club, String name, Boolean rostered, Integer gamesPlayed, Double minutesPlayed, Byte cleanSheets, Short saves, String position) {
         this.goals = goals;
         this.assists = assists;
         this.shots = shots;
@@ -43,18 +44,11 @@ public class Player {
         this.minutesPlayed = minutesPlayed;
         this.cleanSheets = cleanSheets;
         this.saves = saves;
+        this.position = position;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<FantasyTeam> getTeamsRostered() {
-        return teamsRostered;
-    }
-
-    public void setTeamsRostered(List<FantasyTeam> fantasyTeamsOwnedBy) {
-        this.teamsRostered = fantasyTeamsOwnedBy;
     }
 
     public Long getId() {
@@ -139,5 +133,27 @@ public class Player {
         this.saves = saves;
     }
 
-    //TODO: How to get which position class player belongs to?
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public void setSeason(Season season) {
+        this.season = season;
+    }
+
+    //TODO: public Double calculatePlayerPoints() {
+
+//    }
+
+    // TODO: public Double calculatePointsPerGame() {
+
+//    }
 }
