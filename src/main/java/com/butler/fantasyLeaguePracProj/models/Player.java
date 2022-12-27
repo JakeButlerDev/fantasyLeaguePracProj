@@ -10,36 +10,32 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToMany
-//    @JoinTable(name = "rosteredTeams", joinColumns =@JoinColumn(name = "team_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
-//    private List<FantasyTeam> teamsRostered;
-
-    @OneToOne(mappedBy = "player")
+    @ManyToOne
     private Season season;
 
     private String club;
     private String name;
-    private Boolean rostered;
+    private Boolean isRostered;
     private Integer gamesPlayed;
     private Double minutesPlayed;
     private Byte goals;
     private Byte assists;
     private Short shots;
-    protected Byte cleanSheets;
-    protected Short saves;
-
+    private Byte cleanSheets;
+    private Short saves;
+    private double fantasyPointsScored;
     private String position;
 
 
     public Player() { }
 
-    public Player(Byte goals, Byte assists, Short shots, String club, String name, Boolean rostered, Integer gamesPlayed, Double minutesPlayed, Byte cleanSheets, Short saves, String position) {
+    public Player(Byte goals, Byte assists, Short shots, String club, String name, Boolean isRostered, Integer gamesPlayed, Double minutesPlayed, Byte cleanSheets, Short saves, String position) {
         this.goals = goals;
         this.assists = assists;
         this.shots = shots;
         this.club = club;
         this.name = name;
-        this.rostered = rostered;
+        this.isRostered = isRostered;
         this.gamesPlayed = gamesPlayed;
         this.minutesPlayed = minutesPlayed;
         this.cleanSheets = cleanSheets;
@@ -64,7 +60,7 @@ public class Player {
     }
 
     public Boolean getRostered() {
-        return rostered;
+        return isRostered;
     }
 
     public void setClub(String club) {
@@ -75,8 +71,8 @@ public class Player {
         this.name = name;
     }
 
-    public void setRostered(Boolean rostered) {
-        this.rostered = rostered;
+    public void setRostered(Boolean isRostered) {
+        this.isRostered = isRostered;
     }
 
     public Integer getGamesPlayed() {
@@ -147,6 +143,14 @@ public class Player {
 
     public void setSeason(Season season) {
         this.season = season;
+    }
+
+    public double getFantasyPointsScored() {
+        return fantasyPointsScored;
+    }
+
+    public void setFantasyPointsScored(double fantasyPointsScored) {
+        this.fantasyPointsScored = fantasyPointsScored;
     }
 
     //TODO: public Double calculatePlayerPoints() {

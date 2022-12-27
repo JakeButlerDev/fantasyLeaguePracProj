@@ -3,6 +3,7 @@ package com.butler.fantasyLeaguePracProj.models;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Season {
@@ -11,20 +12,22 @@ public class Season {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //TODO: Double check JoinColumn and JsonInclude properties
     @OneToOne
     @JoinColumn(name = "team_id", referencedColumnName = "id")
     @JsonIncludeProperties("id")
     public FantasyTeam fantasyTeam;
 
-    @OneToOne
-    @JoinColumn(name = "player_id", referencedColumnName = "id")
-    public Player player;
+    @OneToMany
+    public List<Player> players;
+
+    public String seasonYears;
 
     public Season() { }
 
-    public Season(FantasyTeam fantasyTeam, Player player) {
+    public Season(FantasyTeam fantasyTeam, List<Player> players) {
         this.fantasyTeam = fantasyTeam;
-        this.player = player;
+        this.players = players;
     }
 
     public Long getId() {
@@ -43,11 +46,11 @@ public class Season {
         this.fantasyTeam = fantasyTeam;
     }
 
-    public Player getPlayer() {
-        return player;
+    public List<Player> getPlayer() {
+        return players;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayer(List<Player> players) {
+        this.players = players;
     }
 }

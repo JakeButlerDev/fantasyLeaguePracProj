@@ -41,6 +41,7 @@ public class PlayerController {
         return new ResponseEntity<>(foundPlayer, HttpStatus.OK);
     }
 
+    //TODO: Include all player fields to allow modification
     @PostMapping ("/{id}")
     public ResponseEntity<?> postPlayerById(@PathVariable Long id, @RequestBody Player updatedPlayerData) {
         Player updatedPlayer =playerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -51,9 +52,12 @@ public class PlayerController {
         if (!updatedPlayerData.getName().equals("")) {
             updatedPlayer.setName(updatedPlayerData.getName());
         }
-        //TODO: Below is throwing error due to using subclasses so getRostered is now in Position classes. Look into more tomorrow
+
         if (updatedPlayerData.getRostered() != null) {
             updatedPlayer.setRostered(updatedPlayerData.getRostered());
+        }
+        if (updatedPlayerData.getPosition() != null) {
+            updatedPlayer.setPosition(updatedPlayerData.getPosition());
         }
 
         return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);

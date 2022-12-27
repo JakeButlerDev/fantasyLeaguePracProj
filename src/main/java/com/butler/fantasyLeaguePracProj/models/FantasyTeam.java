@@ -7,11 +7,6 @@ import java.util.List;
 @Entity
 public class FantasyTeam {
 
-    /*
-    Last error received when trying to create a team:
-    [nio-3334-exec-3] o.h.engine.jdbc.spi.SqlExceptionHelper   : Field 'league_standing' doesn't have a default value
-     */
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,12 +16,9 @@ public class FantasyTeam {
     private int currentPlayers;
     private float pointsScored;
     private int waiverOrder;
-    private double remainingFaab;
 
-    // TODO: Create Season Entity to bridge Player and FantasyTeam complex relationship.
-    //  As of now this is a complex ManytoMany relationship. Can simplify by creating OnetoOne relationships between Player <-> Season and Season <-> FantasyTeam
-//    @ManyToMany(mappedBy = "teamsRostered")
-//    private ArrayList<Player> playersRostered = new ArrayList<>();
+    @ManyToOne
+    private User user;
 
     @OneToOne(mappedBy = "fantasyTeam")
     private Season season;
@@ -40,7 +32,7 @@ public class FantasyTeam {
     private Integer losses;
     private Integer draws;
     private Integer points;     // This is the total points for team in league standings, win = 3, draw = 1, loss = 0
-    private Double fantasyPointsScored;     // Do I want this and pointsAllowed? Could just return sum of all gameweek points to date
+    private Double fantasyPointsScored;
     private Double fantasyPointsAllowed;
 
     public FantasyTeam(String name, int currentPlayers){
@@ -49,6 +41,14 @@ public class FantasyTeam {
     }
 
     public FantasyTeam() { }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -92,14 +92,6 @@ public class FantasyTeam {
 
     public void setWaiverOrder(int waiverOrder) {
         this.waiverOrder = waiverOrder;
-    }
-
-    public double getRemainingFaab() {
-        return remainingFaab;
-    }
-
-    public void setRemainingFaab(double remainingFaab) {
-        this.remainingFaab = remainingFaab;
     }
 
     public void setId(Long id) {
