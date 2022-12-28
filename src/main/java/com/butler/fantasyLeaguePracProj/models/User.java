@@ -1,10 +1,8 @@
 package com.butler.fantasyLeaguePracProj.models;
 
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     // LAZY is bad practice but need to experiment before trying to implement EAGER
    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -33,8 +31,8 @@ public class User {
 
     public User() { }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
     public String getUsername() {

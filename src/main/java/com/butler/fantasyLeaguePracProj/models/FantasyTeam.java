@@ -3,15 +3,13 @@ package com.butler.fantasyLeaguePracProj.models;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class FantasyTeam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long teamId;
 
     private String name;
     private int maxPlayers;
@@ -20,17 +18,17 @@ public class FantasyTeam {
     private int waiverOrder;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonIncludeProperties({"id", "username"})
+    @JoinColumn(name = "user_id", referencedColumnName = "userId")
+    @JsonIncludeProperties({"userId", "username"})
     private User user;
 
     @OneToOne(mappedBy = "fantasyTeam")
-    @JsonIncludeProperties({"id"})
+    @JsonIncludeProperties({"seasonId"})
     private Season season;
 
     @ManyToOne
-    @JoinColumn(name = "league_id", referencedColumnName = "id")
-    @JsonIncludeProperties({"id"})
+    @JoinColumn(name = "league_id", referencedColumnName = "leagueId")
+    @JsonIncludeProperties({"leagueId"})
     private League league;
 
     // Team statistics
@@ -72,8 +70,8 @@ public class FantasyTeam {
         this.pointsScored = pointsScored;
     }
 
-    public Long getId() {
-        return id;
+    public Long getTeamId() {
+        return teamId;
     }
 
     public String getName() {
@@ -100,8 +98,8 @@ public class FantasyTeam {
         this.waiverOrder = waiverOrder;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 
     public Integer getWins() {

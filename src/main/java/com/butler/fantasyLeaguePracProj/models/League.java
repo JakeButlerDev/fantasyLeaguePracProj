@@ -10,11 +10,11 @@ public class League {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long leagueId;
 
     // LAZY is bad practice but need to experiment before trying to implement EAGER
     @OneToMany(mappedBy = "league", fetch = FetchType.LAZY)
-    @JsonIncludeProperties({"id", "name"})
+    @JsonIncludeProperties({"teamId", "name"})
     private Set<FantasyTeam> teams;
 
     private String name;

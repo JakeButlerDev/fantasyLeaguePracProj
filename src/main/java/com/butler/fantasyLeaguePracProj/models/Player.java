@@ -1,16 +1,20 @@
 package com.butler.fantasyLeaguePracProj.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long playerId;
 
     @ManyToOne
+    @JoinColumn(name = "season_id", referencedColumnName = "seasonId")
+    @JsonIncludeProperties({"seasonId"})
     private Season season;
 
     private String club;
@@ -23,13 +27,13 @@ public class Player {
     private Short shots;
     private Byte cleanSheets;
     private Short saves;
-    private double fantasyPointsScored;
-    private String position;
-
+    private Double fantasyPointsScored;
+    @Enumerated(value = EnumType.STRING)
+    private PositionType position;
 
     public Player() { }
 
-    public Player(Byte goals, Byte assists, Short shots, String club, String name, Boolean isRostered, Integer gamesPlayed, Double minutesPlayed, Byte cleanSheets, Short saves, String position) {
+    public Player(Byte goals, Byte assists, Short shots, String club, String name, Boolean isRostered, Integer gamesPlayed, Double minutesPlayed, Byte cleanSheets, Short saves, PositionType position) {
         this.goals = goals;
         this.assists = assists;
         this.shots = shots;
@@ -43,12 +47,12 @@ public class Player {
         this.position = position;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPlayerId() {
+        return playerId;
     }
 
     public String getClub() {
@@ -129,11 +133,11 @@ public class Player {
         this.saves = saves;
     }
 
-    public String getPosition() {
+    public PositionType getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(PositionType position) {
         this.position = position;
     }
 
@@ -153,11 +157,12 @@ public class Player {
         this.fantasyPointsScored = fantasyPointsScored;
     }
 
-    //TODO: public Double calculatePlayerPoints() {
-
+    //TODO: Overload in subclasses
+//    public Double calculateFantasyPoints() {
+//        return (double) (getGoals() * 9 + getAssists() * 6 + getShots() * 2);
 //    }
-
-    // TODO: public Double calculatePointsPerGame() {
-
-//    }
+//
+    public Double calculatePointsPerGame(Double points, Integer gamesPlayed) {
+        return points/gamesPlayed;
+    }
 }
