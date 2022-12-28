@@ -1,5 +1,7 @@
 package com.butler.fantasyLeaguePracProj.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +20,17 @@ public class FantasyTeam {
     private int waiverOrder;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIncludeProperties({"id", "username"})
     private User user;
 
     @OneToOne(mappedBy = "fantasyTeam")
+    @JsonIncludeProperties({"id"})
     private Season season;
 
     @ManyToOne
     @JoinColumn(name = "league_id", referencedColumnName = "id")
+    @JsonIncludeProperties({"id"})
     private League league;
 
     // Team statistics

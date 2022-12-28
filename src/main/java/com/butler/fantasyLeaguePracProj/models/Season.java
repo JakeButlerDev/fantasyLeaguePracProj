@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Season {
@@ -12,20 +13,19 @@ public class Season {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //TODO: Double check JoinColumn and JsonInclude properties
     @OneToOne
     @JoinColumn(name = "team_id", referencedColumnName = "id")
     @JsonIncludeProperties("id")
     public FantasyTeam fantasyTeam;
 
-    @OneToMany
-    public List<Player> players;
+    @OneToMany(targetEntity = Player.class)
+    public Set<Player> players;
 
     public String seasonYears;
 
     public Season() { }
 
-    public Season(FantasyTeam fantasyTeam, List<Player> players) {
+    public Season(FantasyTeam fantasyTeam, Set<Player> players) {
         this.fantasyTeam = fantasyTeam;
         this.players = players;
     }
@@ -46,11 +46,27 @@ public class Season {
         this.fantasyTeam = fantasyTeam;
     }
 
-    public List<Player> getPlayer() {
+    public Set<Player> getPlayer() {
         return players;
     }
 
-    public void setPlayer(List<Player> players) {
+    public void setPlayer(Set<Player> players) {
         this.players = players;
+    }
+
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.players = players;
+    }
+
+    public String getSeasonYears() {
+        return seasonYears;
+    }
+
+    public void setSeasonYears(String seasonYears) {
+        this.seasonYears = seasonYears;
     }
 }
