@@ -1,11 +1,14 @@
 package com.butler.fantasyLeaguePracProj.models;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "playerId")
+@DiscriminatorValue("Forward")
 public class Forward extends Player{
+
+//    private PositionType position = PositionType.FORWARD;
 
     public Forward () {
         super();

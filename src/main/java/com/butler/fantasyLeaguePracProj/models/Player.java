@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="position", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "all_players")
 public class Player {
 
     @Id
@@ -13,7 +15,7 @@ public class Player {
     private Long playerId;
 
     @ManyToOne
-    @JoinColumn(name = "season_id", referencedColumnName = "seasonId")
+    @JoinColumn(name = "seasonId", referencedColumnName = "seasonId")
     @JsonIncludeProperties({"seasonId"})
     private Season season;
 
@@ -29,7 +31,8 @@ public class Player {
     private Short saves;
     private Double fantasyPointsScored;
     @Enumerated(value = EnumType.STRING)
-    private PositionType position;
+    @Column
+    private PositionType position; // Does this need to be set in subclasses?
 
     public Player() { }
 

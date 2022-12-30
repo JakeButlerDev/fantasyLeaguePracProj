@@ -1,10 +1,11 @@
 package com.butler.fantasyLeaguePracProj.models;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "playerId")
+@DiscriminatorValue("Defender")
 public class Defender extends Player{
 
     public Defender() {

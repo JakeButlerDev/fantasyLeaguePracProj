@@ -1,6 +1,8 @@
 package com.butler.fantasyLeaguePracProj.controllers;
 
 import com.butler.fantasyLeaguePracProj.models.Player;
+import com.butler.fantasyLeaguePracProj.repositories.ForwardRepository;
+import com.butler.fantasyLeaguePracProj.repositories.MidfielderRepository;
 import com.butler.fantasyLeaguePracProj.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,10 @@ public class PlayerController {
 
     @Autowired
     private PlayerRepository playerRepository;
+//    @Autowired
+//    private ForwardRepository forwardRepository;
+//    @Autowired
+//    private MidfielderRepository midfielderRepository;
 
     @PostMapping
     public ResponseEntity<?> createOnePlayer(@RequestBody Player newPlayer) {
